@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Course Page
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="course">
+  <h3>Courses</h3>
+  <ion-list>
+    <ion-item-sliding *ngFor='let course of coursesname;let i = index'>
+        <ion-item>
+            <img src="{{coursesimage[i]}}">{{course}}
+        </ion-item>
+
+        <ion-item-options>
+            <button danger small (click)="removeItem()"><icon trash></icon> Delete</button>
+        </ion-item-options>
+    </ion-item-sliding>
+<!--
+    <ion-item-sliding *ngFor='let course of coursesarr'>
+        <ion-item>
+            <img src="{{course.image}}">{{course.coursename}}
+        </ion-item>
+
+        <ion-item-options>
+            <button danger small (click)="removeItem()"><icon trash></icon> Delete</button>
+        </ion-item-options>
+    </ion-item-sliding>    -->
+  
+</ion-list>
+  <button (click)=showAlert()>Alert</button>
+  <button (click)=makeGetRequest()>JSON</button>
+  <button (click)="goHome()">
+  <ion-icon name="home"></ion-icon>
+  </button>
+</ion-content>

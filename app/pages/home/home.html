@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-navbar hideBackButton>
+    <ion-title>
+      Home
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding onload="dismissload()">
+  Welcome to Home Page.
+  <p>
+    This is a test Project on Ionic 2 and Angular 2.
+  </p>
+</ion-content>
+<ion-footer>
+   <button (click)=goToCourse()>Courses</button> <!--goToCourse() function call to push Course Page on top of Home Page-->
+   <!--<button (click)=goToLogin()>Login</button>-->
+</ion-footer>
