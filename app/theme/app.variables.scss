@@ -31,5 +31,31 @@ $colors: (
   danger:     #f53d3d,
   light:      #f4f4f4,
   dark:       #222,
-  favorite:   #69BB7B
+  favorite:   #69BB7B,
+  navBarBlue: #30538C
 );
+
+// Default application fonts
+$default-fonts: Arial, Helvetica, sans-serif;
+
+// Default Vinci Colors
+$vinci-blue: #30538C;
+$vinci-dark-blue: #193B6B;
+$vinci-dark-text: #3A3A3C;
+$vinci-evolution: #99BF0B;
+$vinci-evolution-light: rgba(153, 191, 11, 0.1);
+$vinci-field-border-color: #114989;
+$vinci-grey: #3A3A3C;
+$vinci-image-border-color: #6D6F71;
+$vinci-incident: #E31B27;
+$vinci-incident-light: rgba(227, 27, 39, 0.1);
+$vinci-information:#39ABDC;
+$vinci-information-light: rgba(57, 171, 220, 0.1);
+$vinci-light-text: #58585A;
+$vinci-light-toolbar-background: #FCFCFC;
+$vinci-maintenance: #F39303;
+$vinci-maintenance-light: rgba(243, 147, 3, 0.1);
+$vinci-question: #394B97;
+$vinci-question-light: rgba(57, 75, 151, 0.1);
+$vinci-red: #CD2129;
+$vinci-white: #FFFFFF;

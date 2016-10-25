@@ -7,11 +7,15 @@ import { FormBuilder, Validators } from '@angular/common';
 import {REACTIVE_FORM_DIRECTIVES, FormControl, FormGroup} from '@angular/forms';
 import { HomePage } from '../home/home';
 import {trigger, state, style, transition, animate, keyframes } from '@angular/core';
+import { Config } from '../../components/config/config';
+import {Locale} from '../../components/locale/locale';
+import {LocaleChooser} from '../../components/locale/locale-chooser';
 
 
 
 @Component({
   templateUrl: 'build/pages/login/login.html',
+  directives: [LocaleChooser],
   animations: [
  
     //For the logo
@@ -64,70 +68,197 @@ import {trigger, state, style, transition, animate, keyframes } from '@angular/c
 })
 export class LoginPage {
   loading;
-  loginform;
+  hasPasswordError:boolean;
+  hasUsernameError:boolean;
+  isProcessing:boolean;
+  locales:Locale[];
+  locale:Locale;
+  password:string;
+  passwordErrorKey:string;
+  username:string;
+  usernameErrorKey:string;
   logoState: any = "in";
   cloudState: any = "in";
   loginState: any = "in";
   formState: any = "in";
-  formData = new FormGroup({
-    user : new FormControl(),
-    pass : new FormControl()
-  });
+
   constructor(public navCtrl: NavController,public alertCtrl: AlertController, public http: Http, public loadingCtrl: LoadingController, fb : FormBuilder) {
     this.loading = loadingCtrl.create({
             content: 'Loading',
         });
     this.http = http;
-    this.loginform = fb.group({
-      user:["",Validators.required],
-      pass: ["",Validators.required]
-    });
+    this.hasPasswordError = false;
+    this.hasUsernameError = false;
+    this.isProcessing = false;
+    this.locales = Config.LOCALES;
+    this.password = '';
+    this.passwordErrorKey = null;
+    this.username = '';
+    this.usernameErrorKey = null;
 
+    for (let locale of this.locales) {
+
+      if (locale.code == 'fr') {
+
+        this.locale = locale;
+        this.locale.selected = true;
+
+        break;
+      }
+    }
   }
 
+  /**
+   * Handle the locale change event.
+   *
+   * @param event {Object} Object containing the details of the event that triggered the locale change
+   */
+  localeChangeHandler(event:any) {
 
-  login(formData) {
-    this.loading.present();
-    console.log("User: ",formData.user);
-    console.log("Password: ",formData.pass);
-    this.http.get("http://www.mocky.io/v2/57c66a38110000d6168cf7c4")
-      .subscribe(data => {
-        console.log(data);
-        let obj = data.json();
-        let username = obj.username;
-        let pass = obj.pass;
+    // this._translate.use(event.code);
 
-        if(formData.user == username && formData.pass == pass)
-        {
-          console.log("Login Successful");
-          this.loading.dismiss();
-          this.navCtrl.push(HomePage);
+    // for (let locale of this.locales) {
+
+    //   if (locale.code != event.code) {
+    //     locale.selected = false;
+    //   }
+    //   else {
+
+    //     locale.selected = true;
+    //     this.locale = locale;
+    //   }
+    // }
+  }
+
+  /**
+   * Login the user using the provided username and password pair.
+   */
+  loginUser() {
+
+    let passwordErrorCode:number = this.isValidPassword(this.password);
+    let usernameErrorCode:number = this.isValidUsername(this.username);
+
+    this.hasPasswordError = false;
+    this.hasUsernameError = false;
+    this.isProcessing = true;
+    this.passwordErrorKey = null;
+    this.usernameErrorKey = null;
+
+    if (passwordErrorCode === 0 && usernameErrorCode === 0) {
+
+      // var authorizeObservable = this._uacService.authorize(this.username, this.password);
+
+      // authorizeObservable.subscribe(
+
+      //   data => {
+
+      //     if (data.statut === 1) {
+      //       this.invalidLogin();
+      //     }
+      //     else {
+      //       set('USER_ID', this.username);
+      //       set('USER_LOCALE', this.locale.code);
+      //       set('USER_TOKEN', data.id_token);
+
+      //       try {
+      //         this._pushNotificationService.init();
+      //       }
+      //       catch(e) {
+      //         this._loggingService.sendLogTechnique('WARN', 'Error ' + JSON.stringify(e) +
+      //             ' occurred with Push notification registration for user ' + this.username, new Date().getTime(),
+      //             '/login');
+      //       }
+
+      //       this.navController.push(FeedsPage);
+      //     }
+      //   },
+      //   (error) => {
+      //     this.invalidLogin();
+      //     console.log(error);
+      //   }
+      // );
+    }
+    else {
+
+      if (passwordErrorCode > 0) {
+
+        this.hasPasswordError = true;
+
+        switch(passwordErrorCode) {
+
+          case 1:
+            this.passwordErrorKey = 'LoginPage.errors.password.required';
+            break;
+
+          default:
+            this.passwordErrorKey = null;
         }
-        else{
-          console.log("Verify Credentials");
-          this.loading.dismiss();
-          alert("Bad Credentials!");
+      }
+
+      if (usernameErrorCode > 0) {
+
+        this.hasUsernameError = true;
+
+        switch(usernameErrorCode) {
+
+          case 1:
+            this.usernameErrorKey = 'LoginPage.errors.username.required';
+            break;
+
+          case 2:
+            this.usernameErrorKey = 'LoginPage.errors.username.invalid';
+            break;
+
+          default:
+            this.usernameErrorKey = null;
         }
+      }
 
-      }, error => {
-        console.log(JSON.stringify(error.json()));
-      });
+      this.isProcessing = false;
+    }
+  }
 
-     
+  /**
+   * Invalid user login.
+   */
+  private invalidLogin():void {
+    this.isProcessing = false;
+    this.hasPasswordError = true;
+    this.passwordErrorKey = 'LoginPage.errors.password.invalid';
+  }
 
-    //  if(formData.user == 'sheroze.joomun' && formData.pass == '1234')
-    //  {
-    //    console.log("Login Successful");
-    //    this.loading.dismiss();
-    //    this.navCtrl.push(HomePage);
-    //  }
-    //  else
-    //  {
-    //    console.log("Verify Credentials");
-    //    this.loading.dismiss();
-    //    alert("Bad Credentials!");
-    //  }
-     
+  /**
+   * Validate the password provided by the user.
+   *
+   * @param password {string} Password of the user
+   * @return {number} Password validation code
+   */
+  private isValidPassword(password:string):number {
+
+    if (password.trim().length == 0) {
+      return 1;
+    }
+
+    return 0;
+  }
+
+  /**
+   * Validate the username provided by the user.
+   *
+   * @param username {string} Username of the user
+   * @return {number} Username validation code
+   */
+  private isValidUsername(username:string):number {
+
+    if (username.trim().length === 0) {
+      return 1;
+    }
+
+    if (!/^\w+((\.)(?=\w+)\w+)+$/.test(username)) {
+      return 2;
+    }
+
+    return 0;
   }
 
 }

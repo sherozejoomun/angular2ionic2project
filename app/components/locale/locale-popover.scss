@@ -1,0 +1,46 @@
+@import "../../theme/app.common";
+
+.locale-popover {
+
+  .popover-content {
+    background-color: $vinci-blue;
+    border-radius: 0px;
+    min-height: initial;
+    width: 60px;
+  }
+}
+
+.popover-arrow {
+  display: none;
+}
+
+.locale-popover-list {
+
+  margin: 0;
+
+  .item {
+
+    background-color: $vinci-blue;
+    color: $vinci-white;
+    padding-left: 0;
+    width: 60px;
+
+    .item-inner {
+
+      padding: 0;
+
+      ion-label {
+        margin: 12px 0;
+        text-align: center;
+      }
+    }
+
+    &.hide {
+      display: none;
+    }
+
+    &:last-child {
+      border: 0 none;
+    }
+  }
+}

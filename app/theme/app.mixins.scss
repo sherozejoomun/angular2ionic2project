@@ -1,0 +1,28 @@
+// Flash Info application mixins
+@mixin black-font-with-size($size) {
+  font-family: "Vinci Sans Black", $default-fonts;
+  font-size: $size;
+}
+
+@mixin css-transition($transition) {
+  -moz-transition: $transition;
+  -o-transition: $transition;
+  -webkit-transition: $transition;
+  transition: $transition;
+}
+@mixin gpuCss {
+  -moz-transform: translate3d(0, 0, 0);
+  -ms-transform: translate3d(0, 0, 0);
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+}
+
+@mixin medium-font-with-size($size) {
+  font-family: "Vinci Sans Medium", $default-fonts;
+  font-size: $size;
+}
+
+@mixin regular-font-with-size($size) {
+  font-family: "Vinci Sans Regular", $default-fonts;
+  font-size: $size;
+}

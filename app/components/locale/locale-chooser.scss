@@ -1,0 +1,62 @@
+@import "../../theme/app.common";
+
+.locales {
+
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+
+  .locale {
+
+    display: flex;
+    flex-direction: column;
+    height: 48px;
+    justify-content: space-between;
+    width: 40px;
+
+    @media(max-width: 320px) {
+      height: 44px;
+      width: 36px;
+    }
+
+    .locale-button {
+      @include regular-font-with-size(16px);
+      background-color: $vinci-white;
+      border: 1px solid $vinci-blue;
+      border-radius: 50%;
+      color: $vinci-blue;
+      height: 40px;
+      line-height: 40px;
+      padding: 0;
+      width: 40px;
+
+      @media(max-width: 320px) {
+        font-size: 14px;
+        height: 36px;
+        line-height: 36px;
+        width: 36px;
+      }
+    }
+
+    .locale-underline {
+      background-color: transparent;
+      height: 3px;
+      margin: 0 auto;
+      width: 32px;
+    }
+
+    &.selected {
+
+      .locale-button {
+        background-color: $vinci-blue;
+        border: 1px solid $vinci-white;
+        color: $vinci-white;
+      }
+
+    }
+
+    &:last-child {
+      margin: 0;
+    }
+  }
+}

@@ -1,59 +1,207 @@
-ion-header {
-  ion-navbar {
-    ion-title {
-      background-color: #39acdc;
-      font-family: "Roboto", "Helvetica Neue", sans-serif;
-    }
-  }
-}
+@import "../../theme/app.common";
 
-.login {
- 
-    background-color: #42c7ff;
- 
-    scroll-content {
+.login-page {
+
+  background-size: cover;
+
+  .content {
+
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+
+    .form-container {
+
+      align-items: center;
+      display: flex;
+      flex: 1;
+      justify-content: center;
+
+      form {
+
+        align-items: center;
         display: flex;
         flex-direction: column;
-        overflow: hidden;
-    }
- 
-    img {
-        width: 50%;
-        height: auto;
-        margin: 0 auto;
-    }
- 
-    #cloud-layer {
-        background-image: url(../../images/cloud-layer.png);
-        background-size: cover;
+        justify-content: center;
+        padding: 0 25px;
         width: 100%;
-        height: 100%;
+
+        @media(max-width: 320px) {
+          padding: 0 15px;
+        }
+
+        .app-logo {
+          background: url('../../img/vinci_logo.svg') center center no-repeat;
+          background-size: 100%;
+          height: 40px;
+          width: 160px;
+        }
+
+        .locales {
+
+          justify-content: space-between;
+          margin: 45px 0;
+
+          @media(max-width: 320px) {
+            margin: 30px 0;
+          }
+        }
+
+        .field-rows {
+
+          width: 100%;
+
+          .field-row {
+
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 15px;
+            width: 100%;
+
+            .field-error {
+              @include regular-font-with-size(13px);
+              color: $vinci-red;
+              height: 18px;
+              width: 100%;
+            }
+
+            input {
+
+              @include regular-font-with-size(17px);
+              -moz-appearance: none;
+              -webkit-appearance: none;
+              appearance: none;
+              background-color: $vinci-white;
+              border: 1px solid $vinci-field-border-color;
+              border-radius: 0;
+              box-shadow: none;
+              color: $vinci-grey;
+              height: 36px;
+              outline: none;
+              padding: 5px;
+              width: 100%;
+
+              &:-moz-placeholder {
+                color: $vinci-grey;
+              }
+
+              &:disabled {
+                background-color: $vinci-white;
+              }
+
+              &::-moz-placeholder {
+                color: $vinci-grey;
+              }
+
+              &:-ms-input-placeholder {
+                color: $vinci-grey;
+              }
+
+              &::-webkit-input-placeholder {
+                color: $vinci-grey;
+              }
+
+              &:focus {
+                outline: none;
+              }
+            }
+
+            .email {
+
+              display: flex;
+              flex-direction: row;
+              width: 100%;
+
+              .username-container {
+                flex: 1;
+              }
+
+              .domain {
+                @include regular-font-with-size(15px);
+                color: $vinci-grey;
+                line-height: 36px;
+                text-indent: 5px;
+                white-space: nowrap;
+              }
+            }
+
+            &.has-error {
+
+              input {
+
+                color: $vinci-red;
+                border: 2px solid $vinci-red;
+
+                &:-moz-placeholder {
+                  color: $vinci-red;
+                }
+
+                &::-moz-placeholder {
+                  color: $vinci-red;
+                }
+
+                &:-ms-input-placeholder {
+                  color: $vinci-red;
+                }
+
+                &::-webkit-input-placeholder {
+                  color: $vinci-red;
+                }
+              }
+            }
+
+            .rememberMe{
+                display: flex;
+                flex-direction: row;
+
+                .checkbox{
+                    .checkbox-icon{
+                        border-color: $vinci-blue;
+                    }
+                }
+
+                .remembertext{
+                    padding-left:  10px;
+                    @include regular-font-with-size(17px);
+
+                }
+            }
+
+            &:last-child {
+              margin-bottom: 0;
+            }
+          }
+        }
+
+        .login-button {
+
+          @include regular-font-with-size(19px);
+          background-color: $vinci-blue;
+          border: 1px solid #fff;
+          border-radius: 0;
+          box-shadow: none;
+          color: $vinci-white;
+          height: 42px;
+          margin-top: 50px;
+          width: 100%;
+          
+          .hide {
+            display: none;
+          }
+
+          .spinner {
+            background: url('../../img/spinner.svg') transparent center center no-repeat;
+            background-size: 75%;
+            height: 36px;
+            width: 36px;
+          }
+
+          &:disabled {
+            opacity: 1;
+          }
+        }
+      }
     }
- 
-    ion-row {
-        align-items: center;
-        text-align: center;
-    }
- 
-    ion-item {
-        border-radius: 30px !important;
-        padding-left: 10px !important;
-        margin-bottom: 10px;
-        background-color: #f6f6f6;
-        opacity: 0.7;
-        font-size: 0.9em;
-    }
- 
-    ion-list {
-        margin: 0;
-    }
- 
-    .login-button {
-        width: 100%;
-        border-radius: 30px;
-        font-size: 0.9em;
-        border: 1px solid #fff;
-        background-color: #39acdc;
-    }
- 
+  }
 }

@@ -1,65 +1,44 @@
-<ion-header>
-  <ion-navbar>
-    <ion-title>
-      Welcome! Login Page
-    </ion-title>
-  </ion-navbar>
-</ion-header>
-
-<!--<ion-content padding class="login">
-  <h3>Login</h3>
-  <ion-list>
-<form [formGroup]='formData' (ngSubmit)="login(formData.value)">
-  <ion-item>
-    <ion-label floating>Username</ion-label>
-    <ion-input formControlName="user" type="text"></ion-input>
-  </ion-item>
-
-  <ion-item>
-    <ion-label floating>Password</ion-label>
-    <ion-input formControlName="pass" type="password"></ion-input>
-  </ion-item>
-<div padding>
-  <button block>Sign In</button>
-</div>
-</form>-->
-
-<ion-content class="login">
- 
-    <div padding @flyInBottomFast="cloudState" id="cloud-layer">
- 
-        <ion-row>
-            <ion-col>
-                <img @flyInBottomSlow="logoState" src="../../../image/Koala.jpg" />
-            </ion-col>
-        </ion-row>
-
-      <form [formGroup]='formData' (ngSubmit)="login(formData.value)">
-        <ion-row>
-            <ion-col>
-                <ion-list inset @bounceInBottom="formState">
- 
-                    <ion-item>
-                        <ion-label>Username</ion-label>
-                        <ion-input formControlName="user" type="text"></ion-input>
-                    </ion-item>
- 
-                    <ion-item>
-                        <ion-label>Password</ion-label>
-                        <ion-input formControlName="pass" type="password"></ion-input>
-                    </ion-item>
- 
-                </ion-list>
-            </ion-col>
-        </ion-row>
- 
-        <ion-row>
-            <ion-col>
-                <button class="login-button" @fadeIn="loginState">Login</button>
-            </ion-col>
-        </ion-row>
-      </form>
- 
-    </div>
- 
+<ion-content class="login-page" padding>
+	<div class="content">
+		<div class="form-container">
+			<form>
+				<div class="app-logo"></div>
+				<div class="locales">
+                    <locale-chooser *ngFor="let locale of locales" [code]="locale.code" [label]="locale.label" 
+                    [selected]="locale.selected"></locale-chooser>
+                </div>
+				<div class="field-rows">
+					<div class="field-row" [class.has-error]="hasUsernameError">
+						<div class="field-error">Votre identifiant n'est pas correct</div>
+						<div class="email">
+							<div class="username-container">
+								<input [disabled]="isProcessing" [(ngModel)]="username" name="username" 
+                                placeholder="nom.prénom" type="text" />
+							</div>
+							<div class="domain">@vinci-energies.net</div>
+						</div>
+					</div>
+					<div class="field-row" [class.has-error]="hasPasswordError">
+						<div class="field-error">Votre mot de passe n'est pas correct</div>
+						<div class="password">
+							<input [disabled]="isProcessing" [(ngModel)]="password" name="password" 
+                            placeholder="mot de passe" type="password" />
+						</div>
+					</div>
+                    <div class="field-row">
+                        <div class="rememberMe">
+                            <ion-checkbox [disabled]="isProcessing" ng-model="isChecked" class="checkbox">
+                            </ion-checkbox>
+                            <div class="remembertext">Rester connecté</div>
+                        </div>
+                    </div>
+				</div>
+				<button (click)="loginUser()" [disabled]="isProcessing" class="login-button" 
+                type="button">
+                    <span [class.hide]="isProcessing">Se connecter</span>
+                    <div [class.hide]="!isProcessing" class="spinner"></div>
+                </button>
+			</form>
+		</div>
+	</div>
 </ion-content>

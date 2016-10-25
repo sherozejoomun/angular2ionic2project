@@ -1,0 +1,214 @@
+@import "app.mixins";
+
+// CSS styles used throughout the Flash Info hybrid application.
+
+// Definition of fonts.
+@font-face {
+  font-family: "Vinci Sans Extra Light";
+  font-style: normal;
+  font-weight: 100;
+  src: url("../fonts/Vinci Sans Extra Light.woff2") format("woff2"),
+  url("../fonts/Vinci Sans Extra Light.woff") format("woff"),
+  url("../fonts/Vinci Sans Extra Light.ttf") format("truetype"),
+  url("../fonts/Vinci Sans Extra Light.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "Vinci Sans Light";
+  font-style: normal;
+  font-weight: 300;
+  src: url("../fonts/Vinci Sans Light.woff2") format("woff2"),
+  url("../fonts/Vinci Sans Light.woff") format("woff"),
+  url("../fonts/Vinci Sans Light.ttf") format("truetype"),
+  url("../fonts/Vinci Sans Light.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "Vinci Sans Regular";
+  font-style: normal;
+  font-weight: 500;
+  src: url("../fonts/Vinci Sans Regular.woff2") format("woff2"),
+  url("../fonts/Vinci Sans Regular.woff") format("woff"),
+  url("../fonts/Vinci Sans Regular.ttf") format("truetype"),
+  url("../fonts/Vinci Sans Regular.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "Vinci Sans Medium";
+  font-style: normal;
+  font-weight: 600;
+  src: url("../fonts/Vinci Sans Medium.woff2") format("woff2"),
+  url("../fonts/Vinci Sans Medium.woff") format("woff"),
+  url("../fonts/Vinci Sans Medium.ttf") format("truetype"),
+  url("../fonts/Vinci Sans Medium.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "Vinci Sans Bold";
+  font-style: normal;
+  font-weight: 700;
+  src: url("../fonts/Vinci Sans Bold.woff2") format("woff2"),
+  url("../fonts/Vinci Sans Bold.woff") format("woff"),
+  url("../fonts/Vinci Sans Bold.ttf") format("truetype"),
+  url("../fonts/Vinci Sans Bold.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "Vinci Sans Black";
+  font-style: normal;
+  font-weight: 900;
+  src: url("../fonts/Vinci Sans Black.woff2") format("woff2"),
+  url("../fonts/Vinci Sans Black.woff") format("woff"),
+  url("../fonts/Vinci Sans Black.ttf") format("truetype"),
+  url("../fonts/Vinci Sans Black.otf") format("opentype");
+}
+
+ion-header::after {
+  background: none;
+}
+
+scroll-content {
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.vinci-blue-navbar {
+
+  .toolbar-background {
+    background: $vinci-blue center center no-repeat !important;
+    border-bottom: 1px solid $vinci-blue !important;
+  }
+
+  .nav-bar-button {
+
+    &.vinci-back-icon {
+      background: url('../../img/vinci_back_icon.svg') center center no-repeat;
+      background-size: 65%;
+      height: 32px !important;
+      width: 20px !important;
+    }
+
+    &.vinci-forward-icon {
+      background: url('../../img/vinci_forward_icon.svg') center center no-repeat;
+      background-size: 65%;
+      height: 32px !important;
+      width: 20px !important;
+    }
+  }
+
+  .toolbar-title {
+    @include regular-font-with-size(1.7rem);
+    color: $vinci-white;
+  }
+}
+
+.vinci-white-navbar {
+
+  .toolbar-background {
+    background: $vinci-white center center no-repeat !important;
+    border-bottom: 1px solid $vinci-white !important;
+  }
+
+  .nav-bar-button {
+
+    &.vinci-back-blue-icon {
+      background: url('../../img/vinci_back_blue_icon.svg') center center no-repeat;
+      background-size: 65%;
+      height: 32px !important;
+      width: 20px !important;
+    }
+  }
+
+  .toolbar-title {
+    @include regular-font-with-size(1.7rem);
+    color: $vinci-blue;
+  }
+}
+
+.item-checkbox {
+
+  .fi-checkbox {
+
+    margin: 0 !important;
+
+    .checkbox-icon {
+
+      background: $vinci-white;
+      border: 1px solid #676769;
+      border-radius: 0;
+      margin-right: 8px;
+
+      .checkbox-inner {
+        display: none;
+      }
+    }
+
+    button.item-cover {
+
+      height: 21px;
+      padding: 0;
+
+      .button-inner {
+        height: 21px;
+      }
+    }
+  }
+
+  &.item-checkbox-checked {
+
+    .fi-checkbox {
+
+      .checkbox-icon {
+        background: url('../../img/vinci_checkbox_checked.svg') $vinci-white center center no-repeat;
+        background-size: 90%;
+      }
+    }
+  }
+}
+
+ion-button-effect {
+  display: none;
+}
+
+ion-toggle {
+
+  .toggle-icon {
+
+    background-color: #848484;
+    border-radius: 12px;
+    height: 24px;
+    width: 42px;
+
+    .toggle-inner {
+      background-color: $vinci-white;
+      border-radius: 10px;
+      box-shadow: none;
+      height: 18px;
+      left: 3px;
+      top: 3px;
+      width: 18px;
+    }
+
+    &.toggle-checked {
+
+      .toggle-inner {
+        background-color: $vinci-white;
+        transform: translate3d(18px, 0, 0);
+      }
+    }
+
+    &::before {
+      display: none;
+    }
+  }
+}
+
+ion-toggle[secondary] .toggle-checked {
+  background-color: #8DC63F;
+}
+
+button {
+  box-shadow: none !important;
+}
